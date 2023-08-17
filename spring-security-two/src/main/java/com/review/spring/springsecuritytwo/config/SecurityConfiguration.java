@@ -22,7 +22,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication()
                 .dataSource(dataSource) // points to H2 Database as there are H2 dependency added
-                ;
+                .usersByUsernameQuery("select username, password, enabled" +
+                        "from users" +
+                        "where username = ?")
+                .authoritiesByUsernameQuery("select username, authority " +
+                        "from authorities " +
+                        "where username = ?"); // using custom schema
     }
 
     @Override
