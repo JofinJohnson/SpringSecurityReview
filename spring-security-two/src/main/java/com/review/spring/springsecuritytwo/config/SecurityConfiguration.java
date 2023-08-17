@@ -22,10 +22,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication()
                 .dataSource(dataSource) // points to H2 Database as there are H2 dependency added
-                .withDefaultSchema()    // Tells Spring Security to create Default Tables for Security in DB
-                                        // User Table and Authority Table are created
-                .withUser(User.withUsername("user").password("user").roles("USER")) // adding users and roles in table
-                .withUser(User.withUsername("admin").password("admin").roles("ADMIN"));
+                ;
     }
 
     @Override
